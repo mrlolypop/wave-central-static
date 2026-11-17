@@ -1,0 +1,103 @@
+GETTING GOOGLE TO LIST WAVE.NET.IN
+==================================
+
+Do these in order. Step 1 has to come first: Google should find the real
+site, not the current "Under Construction" page.
+
+
+STEP 1 - Put the site online
+----------------------------
+Upload this folder so it replaces the current "Under Construction"
+index.html (see README.txt). Then open https://wave.net.in/ and check the
+real site loads, and that https://wave.net.in/work.html also loads.
+
+
+STEP 2 - Open Google Search Console
+-----------------------------------
+https://search.google.com/search-console
+
+Sign in with the Google account that should own the site. Use a personal
+account you will keep, not a temporary one - losing access means losing
+the property.
+
+
+STEP 3 - Add the property
+-------------------------
+Click "Add property", choose "Domain" (not "URL prefix"), type:
+
+    wave.net.in
+
+Click Continue.
+
+
+STEP 4 - Verify ownership
+-------------------------
+Google shows a DNS TXT record that looks like:
+
+    google-site-verification=AbCdEf123456...
+
+Because the domain is on Cloudflare:
+
+  Cloudflare dashboard -> wave.net.in -> DNS -> Records -> Add record
+      Type:    TXT
+      Name:    @
+      Content: google-site-verification=...   (paste the whole value)
+      TTL:     Auto
+
+Save. Wait 1-5 minutes, then click "Verify" in Search Console.
+
+If you would rather use a file instead of DNS: Google also offers an HTML
+file named something like google1a2b3c4d5e6f.html. Send me the file or the
+name and I will drop it into the site root for you.
+
+
+STEP 5 - Submit the sitemap
+---------------------------
+Search Console -> Indexing -> Sitemaps -> enter:
+
+    sitemap.xml
+
+(It becomes https://wave.net.in/sitemap.xml.) Click Submit. It should say
+"Success" within a minute.
+
+
+STEP 6 - Ask Google to look at each page
+----------------------------------------
+Use the URL Inspection box at the top of Search Console:
+
+    https://wave.net.in/          -> Request indexing
+    https://wave.net.in/work.html     -> Request indexing
+    https://wave.net.in/portfolio.html -> Request indexing
+    https://wave.net.in/about.html    -> Request indexing
+    https://wave.net.in/contact.html  -> Request indexing
+
+
+WHAT TO EXPECT
+--------------
+Verification ................ minutes
+First crawl ................. hours to a few days
+Showing up in search ........ 3 days to 3 weeks for a brand-new domain
+
+"Discovered - currently not indexed" is normal for a new site and clears
+on its own. Requesting indexing in Step 6 speeds it up.
+
+
+HOW TO CHECK IT WORKED
+----------------------
+Search Google for:   site:wave.net.in
+
+Once the pages appear in that result list, the site is indexed.
+
+For Bing (optional): https://www.bing.com/webmasters lets you import the
+whole setup from Google Search Console in one click.
+
+
+THINGS TO LEAVE ALONE
+---------------------
+- Do not add a "noindex" tag anywhere.
+- Keep robots.txt as it is - it points Google at the sitemap.
+- The canonical tag on every page says https://wave.net.in/... which is
+  correct, and www.wave.net.in already redirects to wave.net.in.
+- The contact form currently opens the visitor's email app addressed to
+  hello@wave.net.in. That is fine for launch; it can be switched to a
+  silent sender later without touching any other page.
